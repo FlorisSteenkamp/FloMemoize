@@ -1,3 +1,3 @@
 # Description
 
-Simple and fast JavaScript Memoization functions using WeakMap.
+Simple and fast JavaScript Memoization function using WeakMap.
