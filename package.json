@@ -1,7 +1,7 @@
 {
   "name": "flo-memoize",
   "description": "Simple and Fast memoization functions using WeakMap.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Floris Steenkamp"
   },
@@ -61,6 +61,15 @@
     "test-only": "mocha --compilers js:babel-core/register ./test/js"
   },
   "browserify": {
-    "transform": [["babelify", { "presets": ["env"] }]]
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "env"
+          ]
+        }
+      ]
+    ]
   }
 }
