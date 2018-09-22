@@ -16,8 +16,8 @@ function m1<T extends Object, U>(f: (a: T) => U): (a: T) => U {
 			//console.log('cache hit');
 			return result; 
 		}
+
 		//console.log('cache miss');
-		
 		result = f(a);
 		results.set(a, result);
 		
