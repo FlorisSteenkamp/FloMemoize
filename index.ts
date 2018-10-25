@@ -5,7 +5,7 @@ const SUPPORTED = typeof WeakMap === 'function';
 /**
  * Memoize the given arity 1 function.
  */
-function m1<T extends Object, U>(f: (a: T) => U): (a: T) => U {
+function memoize<T extends Object, U>(f: (a: T) => U): (a: T) => U {
 	if (!SUPPORTED) { return f; }
 	
 	let results = new WeakMap<T,U>();
@@ -26,7 +26,4 @@ function m1<T extends Object, U>(f: (a: T) => U): (a: T) => U {
 } 
 
 
-let Memoize = {	m1, };
-
-
-export default Memoize;
+export { memoize };

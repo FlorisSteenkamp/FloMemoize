@@ -4,7 +4,7 @@ const SUPPORTED = typeof WeakMap === 'function';
 /**
  * Memoize the given arity 1 function.
  */
-function m1(f) {
+function memoize(f) {
     if (!SUPPORTED) {
         return f;
     }
@@ -21,6 +21,5 @@ function m1(f) {
         return result;
     };
 }
-let Memoize = { m1, };
-exports.default = Memoize;
+exports.memoize = memoize;
 //# sourceMappingURL=index.js.map
