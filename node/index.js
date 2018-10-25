@@ -23,3 +23,4 @@ function m1(f) {
 }
 let Memoize = { m1, };
 exports.default = Memoize;
+//# sourceMappingURL=index.js.map
