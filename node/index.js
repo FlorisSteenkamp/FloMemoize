@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const SUPPORTED = typeof WeakMap === 'function';
 /**
- * Memoize the given arity 1 function.
+ * Memoize (by reference on the input parameter) the given arity 1 function.
  */
 function memoize(f) {
     if (!SUPPORTED) {

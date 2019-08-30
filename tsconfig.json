@@ -1,10 +1,8 @@
 {
     "compilerOptions": {
         "charset": "utf8",
-        "alwaysStrict": true,
+        "strict": true,
         "module": "commonjs",
-        "noImplicitAny": true,
-        "noImplicitThis": true,
         "target": "es2015",
         "declaration": true,
         "noEmitOnError": true,
@@ -12,7 +10,7 @@
         "outDir": "node"
     },
     "include": [
-        "index.ts"
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules"
