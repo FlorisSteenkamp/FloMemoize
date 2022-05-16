@@ -10,10 +10,10 @@
  function cache<V,F extends (...params: any[]) => V>(
         f: F): typeof f {
 
-    let prevParams: Parameters<typeof f> = undefined;
-    let prevResult: V = undefined;
+    let prevParams: Parameters<typeof f> | undefined = undefined;
+    let prevResult: V | undefined = undefined;
 
-    return function(...params: Parameters<typeof f>): V {
+    return function(...params: Parameters<typeof f>): V | undefined {
         if (prevParams === undefined) {
             prevParams = params;
             prevResult = f(...params);
