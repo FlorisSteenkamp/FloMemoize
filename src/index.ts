@@ -1,5 +1,5 @@
-
-import { pairMap_get, pairMap_set } from "./pair-map";
+import { pairMap_get, pairMap_set } from "./pair-map.js";
+import { cache } from './cache.js';
 
 
 const SUPPORTED = typeof WeakMap === 'function';
@@ -52,7 +52,7 @@ function memoize2<T extends Object, U extends Object, V>(
 		
 		return result;
 	}
-} 
+}
 
 
-export { memoize, memoize2 }
+export { memoize, memoize2, cache }

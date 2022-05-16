@@ -1,9 +1,12 @@
 
 
 /**
- * Adds an ordered pair of values to the map
+ * Adds an ordered pair of values to the map.
+ * 
  * @param map The map representing the pairs.
- * @param vs The pair to add.
+ * @param v1
+ * @param v2
+ * @param v3
  */
 function pairMap_set<T extends Object, U extends Object, V>(
         map: WeakMap<T,WeakMap<U,V>>, 
@@ -23,8 +26,10 @@ function pairMap_set<T extends Object, U extends Object, V>(
 /**
  * Returns true if the unordered pair is in the set of pairs (represented by a
  * map).
+ * 
  * @param map The map representing the pairs.
- * @param vs The pair to check.
+ * @param v1
+ * @param v2
  */
 function pairMap_get<T extends Object, U extends Object, V>(
         map: WeakMap<T,WeakMap<U,V>>, 
