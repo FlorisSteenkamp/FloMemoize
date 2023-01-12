@@ -8,7 +8,7 @@ function memoize(f) {
     if (!SUPPORTED) {
         return f;
     }
-    let results = new WeakMap();
+    const results = new WeakMap();
     return function (a) {
         let result = results.get(a);
         if (result !== undefined) {
@@ -28,7 +28,7 @@ function memoize2(f) {
     if (!SUPPORTED) {
         return f;
     }
-    let results = new WeakMap();
+    const results = new WeakMap();
     return function (a, b) {
         let result = pairMap_get(results, a, b);
         if (result !== undefined) {

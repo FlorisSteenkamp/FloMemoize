@@ -15,8 +15,8 @@ const extensions = [
 
 
 const config_Basic = {
-    // mode: 'production',
-    mode: 'development',
+    mode: 'production',
+    // mode: 'development',
     entry: './src/index.ts',
     resolve: {
         extensions,
@@ -125,9 +125,8 @@ const config_EsmNoMinify = {
 
 
 module.exports = [
-    // TODO - put back
-    //config_VarMinify,
-    //config_VarNoMinify,
-    //config_EsmMinify,
+    config_VarMinify,
+    config_VarNoMinify,
+    config_EsmMinify,
     config_EsmNoMinify
 ];

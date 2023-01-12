@@ -23,7 +23,7 @@ function pairMap_set(map, v1, v2, v3) {
  * @param v2
  */
 function pairMap_get(map, v1, v2) {
-    let v1Map = map.get(v1);
+    const v1Map = map.get(v1);
     if (!v1Map) {
         return undefined;
     }

@@ -1,5 +1,4 @@
 
-
 /**
  * Adds an ordered pair of values to the map.
  * 
@@ -8,7 +7,7 @@
  * @param v2
  * @param v3
  */
-function pairMap_set<T extends Object, U extends Object, V>(
+function pairMap_set<T extends object, U extends object, V>(
         map: WeakMap<T,WeakMap<U,V>>, 
         v1: T,
         v2: U,
@@ -31,12 +30,12 @@ function pairMap_set<T extends Object, U extends Object, V>(
  * @param v1
  * @param v2
  */
-function pairMap_get<T extends Object, U extends Object, V>(
+function pairMap_get<T extends object, U extends object, V>(
         map: WeakMap<T,WeakMap<U,V>>, 
         v1: T,
         v2: U): V | undefined {
 
-    let v1Map = map.get(v1);
+    const v1Map = map.get(v1);
     if (!v1Map) { 
         return undefined;
     }

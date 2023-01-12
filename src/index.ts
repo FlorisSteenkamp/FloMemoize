@@ -8,10 +8,10 @@ const SUPPORTED = typeof WeakMap === 'function';
 /**
  * Memoize (by reference on the input parameter) the given arity 1 function.
  */
-function memoize<T extends Object, U>(f: (a: T) => U): (a: T) => U {
+function memoize<T extends object, U>(f: (a: T) => U): (a: T) => U {
 	if (!SUPPORTED) { return f; }
 	
-	let results = new WeakMap<T,U>();
+	const results = new WeakMap<T,U>();
 	
 	return function(a: T): U {
 		let result = results.get(a);
@@ -32,12 +32,12 @@ function memoize<T extends Object, U>(f: (a: T) => U): (a: T) => U {
 /**
  * Memoize (by reference on the ordered input parameters) the given arity 2 function.
  */
-function memoize2<T extends Object, U extends Object, V>(
+function memoize2<T extends object, U extends object, V>(
 		f: (a: T, b: U) => V): (a: T, b: U) => V {
 
 	if (!SUPPORTED) { return f; }
 	
-	let results = new WeakMap<T,WeakMap<U,V>>();
+	const results = new WeakMap<T,WeakMap<U,V>>();
 	
 	return function(a: T, b: U): V {
 		let result = pairMap_get(results, a, b);
