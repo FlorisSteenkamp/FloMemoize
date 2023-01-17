@@ -5,10 +5,15 @@ module.exports = {
         "node": true
     },
     "ignorePatterns": [
-        "node_modules/**/*",
         "*.cjs",
+        "*.min.js",
+        "node_modules/",
+        "dist/**/*",
+        "build/**/*",
         "node/**/*",
         "browser/**/*",
+        "unused/**/*",
+        "src-unused/**/*",
         "test/**/*"
     ],
     "extends": [
@@ -32,15 +37,20 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
         "tree-shaking/no-side-effects-in-initialization": [
             2,
             {
                 "noSideEffectsWhenCalled": [
                     { "function": "Object.freeze" },
                     {
-                        "module": "react",
-                        "functions": ["createContext", "createRef"],
-                    }
+                        "module": "#local",
+                        "functions": [
+                            
+                        ]
+                    },
                 ]
             }
         ]
