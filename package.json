@@ -2,7 +2,7 @@
     "name": "flo-memoize",
     "sideEffects": false,
     "description": "Simple and Fast memoization function using WeakMap.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": {
         "name": "Floris Steenkamp"
     },
