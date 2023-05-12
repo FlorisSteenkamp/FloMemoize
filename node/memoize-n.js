@@ -1,105 +1,3 @@
-/******/ // The require scope
-/******/ var __webpack_require__ = {};
-/******/ 
-/************************************************************************/
-/******/ /* webpack/runtime/define property getters */
-/******/ (() => {
-/******/ 	// define getter functions for harmony exports
-/******/ 	__webpack_require__.d = (exports, definition) => {
-/******/ 		for(var key in definition) {
-/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 			}
-/******/ 		}
-/******/ 	};
-/******/ })();
-/******/ 
-/******/ /* webpack/runtime/hasOwnProperty shorthand */
-/******/ (() => {
-/******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ })();
-/******/ 
-/************************************************************************/
-var __webpack_exports__ = {};
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "Fs": () => (/* reexport */ cache),
-  "HP": () => (/* reexport */ memoize),
-  "pw": () => (/* reexport */ memoize2),
-  "O2": () => (/* reexport */ memoizeN)
-});
-
-;// CONCATENATED MODULE: ./src/memoize.ts
-/**
- * Memoize (by reference on the input parameter) the given arity 1 function.
- *
- * * the input parameter must be an `object` (so it can be used as a key to
- * `WeakMap` and thus garbage collected later; this is especially important
- * in functional programming where a lot of garbage collection takes place;
- *
- * * use `memoizePrimitive` instead if it is not important that the keys
- * will *never* be garbage collected
- */
-function memoize(f) {
-    const results = new WeakMap();
-    return function (t) {
-        let r = results.get(t);
-        if (r !== undefined) {
-            //console.log('cache hit');
-            return r;
-        }
-        //console.log('cache miss');
-        r = f(t);
-        results.set(t, r);
-        return r;
-    };
-}
-
-
-;// CONCATENATED MODULE: ./src/cache.ts
-/**
- * Returns the same result for the same paramters (where the parameters are
- * considered the same if they have the same length and contain the same
- * ordered elements when elements are compared with `===` (e.g. objects are
- * compared *by reference*).
- *
- * @param f the function to cache
- * @param size the size (length) of the cache before older values will be
- * `shift`ed out into the nether
- */
-function cache(f, size = 1) {
-    const prevParamss = [];
-    const prevResults = [];
-    return function (...params) {
-        for (let i = 0; i < prevParamss.length; i++) {
-            let allSame = true;
-            for (let j = 0; j < params.length; j++) {
-                const param = params[j];
-                if (param !== prevParamss[i][j]) {
-                    allSame = false;
-                    break;
-                }
-            }
-            if (allSame) {
-                //console.log('cache hit');
-                return prevResults[i];
-            }
-        }
-        prevParamss.push(params);
-        const result = f(...params);
-        prevResults.push(result);
-        if (prevParamss.length > size) {
-            prevParamss.shift();
-            prevResults.shift();
-        }
-        //console.log('cache miss');
-        return result;
-    };
-}
-
-
-;// CONCATENATED MODULE: ./src/memoize-n.ts
 /**
  * Memoize (by reference on the ordered input parameters) the given arity 0
  * function
@@ -369,7 +267,7 @@ function memoizeN(f) {
     return memoize6(f);
     // }
 }
-
+export { memoize2, memoizeN };
 // TEST
 /*
 function Test() {
@@ -519,15 +417,4 @@ function Test() {
 }
 Test();
 */
-
-;// CONCATENATED MODULE: ./src/index.ts
-
-
-
-
-
-var __webpack_exports__cache = __webpack_exports__.Fs;
-var __webpack_exports__memoize = __webpack_exports__.HP;
-var __webpack_exports__memoize2 = __webpack_exports__.pw;
-var __webpack_exports__memoizeN = __webpack_exports__.O2;
-export { __webpack_exports__cache as cache, __webpack_exports__memoize as memoize, __webpack_exports__memoize2 as memoize2, __webpack_exports__memoizeN as memoizeN };
+//# sourceMappingURL=memoize-n.js.map
