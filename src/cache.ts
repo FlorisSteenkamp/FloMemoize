@@ -5,30 +5,42 @@
  * ordered elements when elements are compared with `===` (e.g. objects are 
  * compared *by reference*).
  * 
- * @param f 
+ * @param f the function to cache
+ * @param size the size (length) of the cache before older values will be 
+ * `shift`ed out into the nether
  */
- function cache<V,F extends (...params: any[]) => V>(
-        f: F): typeof f {
+function cache<V,F extends (...params: any[]) => V>(
+        f: F, size = 1): typeof f {
 
-    let prevParams: Parameters<typeof f> | undefined = undefined;
-    let prevResult: V | undefined = undefined;
+    const prevParamss: Parameters<typeof f>[] = [];
+    const prevResults: V[] = [];
 
-    return function(...params: Parameters<typeof f>): V | undefined {
-        if (prevParams === undefined) {
-            prevParams = params;
-            prevResult = f(...params);
-            return prevResult;
-        }
-        for (let i=0; i<params.length; i++) {
-            const param = params[i];
-            if (param !== prevParams[i]) {
-                prevParams = params;
-                prevResult = f(...params);
-                return prevResult;
+    return function(...params: Parameters<typeof f>): V {
+        for (let i=0; i<prevParamss.length; i++) {
+            let allSame = true;
+            for (let j=0; j<params.length; j++) {
+                const param = params[j];
+                if (param !== prevParamss[i][j]) {
+                    allSame = false;
+                    break;
+                }
+            }
+            if (allSame) {
+                //console.log('cache hit');
+                return prevResults[i];
             }
         }
 
-        return prevResult;
+        prevParamss.push(params);
+        const result = f(...params);
+        prevResults.push(result);
+        if (prevParamss.length > size) {
+            prevParamss.shift();
+            prevResults.shift();
+        }
+
+        //console.log('cache miss');
+        return result;
     } as F;
 }
 
