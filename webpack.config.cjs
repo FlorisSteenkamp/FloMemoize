@@ -1,12 +1,5 @@
 const path = require('path');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
-const ResolveTypeScriptPlugin = require("resolve-typescript-plugin");
-
-
-const extensions = [
-    '.js', '.mjs', '.cjs', 
-    '.jsx', '.cjsx', '.mjsx'
-];
 
 
 const config_Basic = {
@@ -14,19 +7,28 @@ const config_Basic = {
     // mode: 'development',
     entry: './src/index.ts',
     resolve: {
-        extensions,
-        plugins: [
-            new ResolveTypeScriptPlugin({includeNodeModules: false})
-        ]
+        extensions: [
+            '.js', '.mjs', '.cjs', 
+            '.jsx', '.cjsx', '.mjsx',
+            '.tsx', '.ts', '.d.ts'
+        ],
+        extensionAlias: {
+            ".js": [".js", ".ts"],
+            ".cjs": [".cjs", ".cts"],
+            ".mjs": [".mjs", ".mts"]
+        },
+        alias: {}
     },
     module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
-        ]
+        rules: [{
+            test: /\.tsx?$/,
+            use: [{
+                loader: 'ts-loader',
+                options: { silent: true }
+            }],
+            exclude: /node_modules/,
+            sideEffects: false
+        }]
     },
     stats: {
         // Don't display most things

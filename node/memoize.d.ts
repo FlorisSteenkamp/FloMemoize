@@ -1,12 +1,24 @@
+type MapMap<T extends object, R> = {
+    readonly weakMap: WeakMap<T, R>;
+    readonly map: Map<T, R>;
+};
+type CachePart<R> = {
+    readonly weakMapS: WeakMap<object, MapMap<object, any>>;
+    readonly mapS: Map<object, MapMap<object, any>>;
+    readonly clearCache: () => void;
+    readonly addToCache: (r: R, ...args: any) => void;
+};
 /**
- * Memoize (by reference on the input parameter) the given arity 1 function.
+ * Memoize (by reference on the ordered input parameters) the given function
+ * up to arity 8.
  *
- * * the input parameter must be an `object` (so it can be used as a key to
- * `WeakMap` and thus garbage collected later; this is especially important
- * in functional programming where a lot of garbage collection takes place;
+ * * prefer most numerous parameters last in formal parameter list
  *
- * * use `memoizePrimitive` instead if it is not important that the keys
- * will *never* be garbage collected
+ * @param f the function to memoize
+ * @param maxPrimitiveCacheLengths if not `undefined` then the size of caching
+ * maps having primitive values is limited to this value (in which case it is
+ * a Map (not a WeakMap)). The value corresponds to the index of the function
+ * parameter, starting from 0.
  */
-declare function memoize<T extends object, U>(f: (a: T) => U): (a: T) => U;
+declare function memoize<F extends ((...args: any[]) => R), R>(f: F, maxPrimitiveCacheLengths?: number[] | undefined, logCacheMissHit?: boolean): F & CachePart<R>;
 export { memoize };
